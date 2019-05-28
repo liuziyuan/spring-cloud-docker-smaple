@@ -34,7 +34,7 @@ public class RoleController {
 	@ResponseStatus(HttpStatus.OK)
     public Map<String, Object> getRole(@PathVariable Integer id) {
 		map = new HashMap<>();
-		map.put("role",roleRepository.findById(id).get());
+		map.put("role",roleRepository.getOne(id));
         return map;
     }
 	

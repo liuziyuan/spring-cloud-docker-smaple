@@ -34,7 +34,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
     public Map<String, Object> getUser(@PathVariable Integer id) {
 		map = new HashMap<>();
-		map.put("user",this.userRepository.findById(id).get());
+		map.put("user",this.userRepository.getOne(id));
         return map;
     }
 	
