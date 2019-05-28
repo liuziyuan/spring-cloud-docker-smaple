@@ -29,7 +29,7 @@ public class AuthorizationService {
 		Role role = roleRepository.getOne(role_id);
 		List<Resource> permissions = resourceRepository.findAllById(resource_ids);
 		role.setResources(new HashSet<>(permissions));
-		role = roleRepository.save(role);
+		role = roleRepository.saveAndFlush(role);
 		return role;
 		
 	}
@@ -39,7 +39,7 @@ public class AuthorizationService {
 		User user = userRepository.getOne(user_id);
 		List<Role> roles = roleRepository.findAllById(role_ids);
 		user.setRoles(new HashSet<Role>(roles));
-		user = userRepository.save(user);
+		user = userRepository.saveAndFlush(user);
 		return user;
 		
 	}
