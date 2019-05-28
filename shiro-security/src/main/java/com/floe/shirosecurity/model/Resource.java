@@ -10,10 +10,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Permissions")
-public class Permission extends IdEntity  {
+@Table(name = "Resources")
+public class Resource extends IdEntity  {
     private String code;
     private String name;
     private String uri;
+    private String httpVerb;
     private String type;
 }

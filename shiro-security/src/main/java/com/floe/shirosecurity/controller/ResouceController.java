@@ -17,53 +17,60 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.floe.shirosecurity.model.User;
-import com.floe.shirosecurity.repository.UserRepository;
-
+import com.floe.shirosecurity.model.Resource;
+import com.floe.shirosecurity.repository.ResourceRepository;
 
 @RestController
-@RequestMapping("api/users")
-public class UserController {
-	
+@RequestMapping("api/resources")
+public class ResouceController {
 	@Autowired
-	private UserRepository userRepository;
+	private ResourceRepository resourceRepository;
 
 	private Map<String, Object> map;
 	
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-    public Map<String, Object> getUser(@PathVariable Integer id) {
+    public Map<String, Object> getResource(@PathVariable Integer id) {
 		map = new HashMap<>();
-		map.put("user",this.userRepository.getOne(id));
+		map.put("resource",this.resourceRepository.getOne(id));
         return map;
     }
 	
 	@GetMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> getUsers(){
+	public Map<String, Object> getResource(){
 		map = new HashMap<>();
-		map.put("users", (List<User>) userRepository.findAll());
+		map.put("resources", (List<Resource>) resourceRepository.findAll());
 		return map;
 	}
 	
 	@PostMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	public Map<String, Object> newUser(@RequestBody User user) {
+	public Map<String, Object> newResource(@RequestBody Resource resource) {
 		map = new HashMap<>();
-		map.put("user",userRepository.save(user));
+		int count = resourceRepository.countByCode(resource.getCode());
+		if(count == 0) {
+			map.put("resource",resourceRepository.save(resource));
+		}else {
+			map.put("error", "Data existing");
+		}
+		
 		return map;
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> editUser(@PathVariable Integer id, @RequestBody User user) {
+	public Map<String, Object> editResource(@PathVariable Integer id, @RequestBody Resource resource) {
 		map = new HashMap<>();
-		if(id == user.getId()) {
-			map.put("user", userRepository.saveAndFlush(user));
+		if(id == resource.getId()) {
+			int count = resourceRepository.countByCode(resource.getCode());
+			if(count == 0) {
+				map.put("resource", resourceRepository.saveAndFlush(resource));
+			}
 		}
 		return map;
 	}
@@ -71,11 +78,9 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> deleteUser(@PathVariable Integer id) {
+	public Map<String, Object> deleteResource(@PathVariable Integer id) {
 		map = new HashMap<>();
-		userRepository.deleteById(id);
+		resourceRepository.deleteById(id);
 		return map;
 	}
-
-	
 }

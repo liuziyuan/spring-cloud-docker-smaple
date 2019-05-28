@@ -2,8 +2,8 @@ package com.floe.shirosecurity.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.floe.shirosecurity.model.Permission;
+import com.floe.shirosecurity.model.Resource;
 
-public interface PermissionRepository extends JpaRepository<Permission, Integer> {
-
+public interface ResourceRepository extends JpaRepository<Resource, Integer> {
+	Integer countByCode(String code);
 }
