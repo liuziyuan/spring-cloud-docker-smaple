@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,7 @@ public class UserController {
 
 	private Map<String, Object> map;
 	
+	@RequiresPermissions("USER:SEARCH:ALL")
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
@@ -39,6 +41,7 @@ public class UserController {
         return map;
     }
 	
+	@RequiresPermissions("USER:SEARCH:ONE")
 	@GetMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
@@ -48,6 +51,7 @@ public class UserController {
 		return map;
 	}
 	
+	@RequiresPermissions("USER:CREATE")
 	@PostMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
@@ -57,10 +61,11 @@ public class UserController {
 		return map;
 	}
 	
+	@RequiresPermissions("USER:UPDATE")
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> editUser(@PathVariable Integer id, @RequestBody User user) {
+	public Map<String, Object> updateUser(@PathVariable Integer id, @RequestBody User user) {
 		map = new HashMap<>();
 		if(id == user.getId()) {
 			map.put("user", userRepository.saveAndFlush(user));
@@ -68,6 +73,7 @@ public class UserController {
 		return map;
 	}
 	
+	@RequiresPermissions("USER:DELETE")
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)

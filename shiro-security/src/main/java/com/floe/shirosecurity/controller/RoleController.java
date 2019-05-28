@@ -75,7 +75,7 @@ public class RoleController {
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> deleteRole(@PathVariable Integer id) {
+	public Map<String, Object> updateRole(@PathVariable Integer id) {
 		map = new HashMap<>();
 		roleRepository.deleteById(id);
 		return map;

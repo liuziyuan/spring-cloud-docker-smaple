@@ -64,7 +64,7 @@ public class ResouceController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> editResource(@PathVariable Integer id, @RequestBody Resource resource) {
+	public Map<String, Object> updateResource(@PathVariable Integer id, @RequestBody Resource resource) {
 		map = new HashMap<>();
 		if(id == resource.getId()) {
 			int count = resourceRepository.countByCode(resource.getCode());
