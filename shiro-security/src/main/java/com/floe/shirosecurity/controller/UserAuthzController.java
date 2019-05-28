@@ -20,8 +20,8 @@ import com.floe.shirosecurity.repository.UserRepository;
 import com.floe.shirosecurity.service.AuthorizationService;
 
 @RestController
-@RequestMapping("api/userAuths")
-public class UserAuthorizationController {
+@RequestMapping("api/userAuthz")
+public class UserAuthzController {
 
 	@Autowired
 	private AuthorizationService authorizationService;
@@ -33,7 +33,7 @@ public class UserAuthorizationController {
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> getUserRoleAuth(@PathVariable Integer id){
+	public Map<String, Object> getUserRoleAuthz(@PathVariable Integer id){
 		map = new HashMap<>();
 		User user = userRepository.getOne(id);
 		map.put("user", user);
@@ -45,7 +45,7 @@ public class UserAuthorizationController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> updateUserRoleAuth(@PathVariable Integer id, @RequestParam(value ="role_ids") List<Integer> role_ids) {
+	public Map<String, Object> updateUserRoleAuthz(@PathVariable Integer id, @RequestParam(value ="role_ids") List<Integer> role_ids) {
 		map = new HashMap<>();
 		User user = authorizationService.userAuthorized(id, role_ids);
 		map.put("user", user);

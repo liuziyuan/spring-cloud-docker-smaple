@@ -20,8 +20,8 @@ import com.floe.shirosecurity.repository.RoleRepository;
 import com.floe.shirosecurity.service.AuthorizationService;
 
 @RestController
-@RequestMapping("api/roleAuths")
-public class RoleAuthorizationController {
+@RequestMapping("api/roleAuthz")
+public class RoleAuthzController {
 	@Autowired
 	private AuthorizationService authorizationService;
 	@Autowired
@@ -32,7 +32,7 @@ public class RoleAuthorizationController {
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> getRoleResourceAuth(@PathVariable Integer id){
+	public Map<String, Object> getRoleResourceAuthz(@PathVariable Integer id){
 		map = new HashMap<>();
 		Role role = roleRepository.getOne(id);
 		map.put("role", role);
@@ -44,7 +44,7 @@ public class RoleAuthorizationController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> updateRoleResourcesAuth(@PathVariable Integer id, @RequestParam(value ="role_ids") List<Integer> role_ids) {
+	public Map<String, Object> updateRoleResourcesAuthz(@PathVariable Integer id, @RequestParam(value ="role_ids") List<Integer> role_ids) {
 		map = new HashMap<>();
 		Role role = authorizationService.roleAuthorized(id, role_ids);
 		map.put("role", role);
