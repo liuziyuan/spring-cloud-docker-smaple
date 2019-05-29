@@ -1,6 +1,6 @@
 spring:
     jpa:
-        database: postgresql_dev
+        database: postgresql
         show-sql: true
         hibernate:
             ddl-auto: update
