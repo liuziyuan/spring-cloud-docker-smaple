@@ -1,19 +1,22 @@
 spring:
-    jpa:
-        database: postgresql
-        show-sql: true
-        hibernate:
-            ddl-auto: update
-        properties:
-            hibernates:
-                temp:
-                    use_jdbc_metadata_defaults: false
-    datasource:
-        url: jdbc:postgresql://localhost:5432/postgres
-        username: postgres
-        password: postgres
-        driver-class-name: org.postgresql.Driver
+    profiles:
+        active: dev
+# spring:
+#     jpa:
+#         database: postgresql
+#         show-sql: true
+#         hibernate:
+#             ddl-auto: update
+#         properties:
+#             hibernates:
+#                 temp:
+#                     use_jdbc_metadata_defaults: false
+#     datasource:
+#         url: jdbc:postgresql://localhost:5432/postgres
+#         username: postgres
+#         password: postgres
+#         driver-class-name: org.postgresql.Driver
         
-logging:
-    level:
-        org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+# logging:
+#     level:
+#         org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR

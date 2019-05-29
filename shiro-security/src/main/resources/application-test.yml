@@ -1,0 +1,22 @@
+spring:
+    jpa:
+        database: postgresql_test
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernates:
+                temp:
+                    use_jdbc_metadata_defaults: false
+    datasource:
+        url: jdbc:postgresql://localhost:5432/postgres_test
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+        
+logging:
+    level:
+        org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+        org.springframework.security: DEBUG
+
+    
