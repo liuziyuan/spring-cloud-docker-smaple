@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +33,7 @@ public class ResouceController {
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
+	@RequiresPermissions(value = { "ALL" , "RESOURCE:SEARCH:*" } , logical = Logical.OR)
     public Map<String, Object> getResource(@PathVariable Integer id) {
 		map = new HashMap<>();
 		map.put("resource",this.resourceRepository.getOne(id));
@@ -40,7 +43,8 @@ public class ResouceController {
 	@GetMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> getResource(){
+	@RequiresPermissions(value = { "ALL" , "RESOURCE:SEARCH:*" } , logical = Logical.OR)
+	public Map<String, Object> getResources(){
 		map = new HashMap<>();
 		map.put("resources", (List<Resource>) resourceRepository.findAll());
 		return map;
@@ -49,6 +53,7 @@ public class ResouceController {
 	@PostMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
+	@RequiresPermissions(value = { "ALL" , "RESOURCE:CREATE" } , logical = Logical.OR)
 	public Map<String, Object> newResource(@RequestBody Resource resource) {
 		map = new HashMap<>();
 		int count = resourceRepository.countByCode(resource.getCode());
@@ -64,6 +69,7 @@ public class ResouceController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
+	@RequiresPermissions(value = { "ALL" , "RESOURCE:UPDATE" } , logical = Logical.OR)
 	public Map<String, Object> updateResource(@PathVariable Integer id, @RequestBody Resource resource) {
 		map = new HashMap<>();
 		if(id == resource.getId()) {
@@ -78,6 +84,7 @@ public class ResouceController {
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
+	@RequiresPermissions(value = { "ALL" , "RESOURCE:DELETE" } , logical = Logical.OR)
 	public Map<String, Object> deleteResource(@PathVariable Integer id) {
 		map = new HashMap<>();
 		resourceRepository.deleteById(id);

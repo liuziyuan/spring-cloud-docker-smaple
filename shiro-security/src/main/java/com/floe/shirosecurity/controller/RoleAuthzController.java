@@ -44,9 +44,9 @@ public class RoleAuthzController {
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Map<String, Object> updateRoleResourcesAuthz(@PathVariable Integer id, @RequestParam(value ="role_ids") List<Integer> role_ids) {
+	public Map<String, Object> updateRoleResourcesAuthz(@PathVariable Integer id, @RequestParam(value ="resource_ids") List<Integer> resource_ids) {
 		map = new HashMap<>();
-		Role role = authorizationService.roleAuthorized(id, role_ids);
+		Role role = authorizationService.roleAuthorized(id, resource_ids);
 		map.put("role", role);
 		map.put("permissions", role.getResources());
 		return map;

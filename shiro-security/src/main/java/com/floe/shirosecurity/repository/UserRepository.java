@@ -7,4 +7,6 @@ import com.floe.shirosecurity.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	User findFirstByUsername(String username);
+	
+	User findFirstByUsernameAndPassword(String username, String password);
 }

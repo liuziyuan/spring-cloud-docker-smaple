@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -24,7 +26,10 @@ public class Role extends IdEntity {
 	private String code;
 	private String name;
 	@JsonIgnore
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private Set<Resource> resources= new HashSet<>();
-	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "role_authz", 
+	joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") },
+	inverseJoinColumns = { @JoinColumn(name = "resource_id", referencedColumnName = "id") })
+	private Set<Resource> resources = new HashSet<>();
+
 }

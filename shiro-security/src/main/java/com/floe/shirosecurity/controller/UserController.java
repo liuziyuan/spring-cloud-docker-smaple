@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.floe.shirosecurity.model.User;
 import com.floe.shirosecurity.repository.UserRepository;
 
-
 @RestController
 @RequestMapping("api/users")
 public class UserController {
@@ -31,7 +30,7 @@ public class UserController {
 
 	private Map<String, Object> map;
 	
-	@RequiresPermissions("USER:SEARCH:ALL")
+//	@RequiresPermissions("USER:SEARCH:ALL")
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
@@ -41,7 +40,7 @@ public class UserController {
         return map;
     }
 	
-	@RequiresPermissions("USER:SEARCH:ONE")
+//	@RequiresPermissions("USER:SEARCH:ONE")
 	@GetMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
@@ -51,7 +50,7 @@ public class UserController {
 		return map;
 	}
 	
-	@RequiresPermissions("USER:CREATE")
+//	@RequiresPermissions("USER:CREATE")
 	@PostMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
@@ -61,7 +60,7 @@ public class UserController {
 		return map;
 	}
 	
-	@RequiresPermissions("USER:UPDATE")
+//	@RequiresPermissions("USER:UPDATE")
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
@@ -73,7 +72,7 @@ public class UserController {
 		return map;
 	}
 	
-	@RequiresPermissions("USER:DELETE")
+//	@RequiresPermissions("USER:DELETE")
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
