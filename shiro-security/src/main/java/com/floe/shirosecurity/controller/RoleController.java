@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,6 +42,7 @@ public class RoleController {
 	@GetMapping("/")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
+	@RequiresPermissions(value = {"ROLE:SEARCH:*" } )
 	public Map<String, Object> getRoles(){
 		map = new HashMap<>();
 		map.put("roles", (List<Role>) roleRepository.findAll());
